@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white">
+
+        <FrameLayout
+            android:id="@+id/dialog_choose_single_data_cancel_layout"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_gravity="start"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="取消" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/dialog_choose_single_data_determine_layout"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_gravity="end"
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="16dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="确定" />
+        </FrameLayout>
+
+    </FrameLayout>
+
+    <com.example.mydesignapplication.myview.PickerView
+        android:id="@+id/dialog_choose_single_data_picker_view"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:background="@color/white" />
+
+</LinearLayout>
