@@ -1,5 +1,7 @@
 package com.example.mydesignapplication
 
+
+import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.os.Build
@@ -12,13 +14,12 @@ import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2
-import com.example.mydesignapplication.candidate.CandidateFragment
-import com.example.mydesignapplication.mine.MineFragment
-import com.example.mydesignapplication.post.PostFragment
+import com.example.mydesignapplication.data.bean.EmployerAccountBean
+import com.example.mydesignapplication.ui.candidate.CandidateFragment
+import com.example.mydesignapplication.ui.mine.MineFragment
+import com.example.mydesignapplication.ui.post.PostFragment
 import com.example.mydesignapplication.publicclass.ViewPagerAdapter
-import com.example.mydesignapplication.releasejob.releasejob2.ReleaseJob2Activity
-import com.example.mydesignapplication.releasejob.releasejob3.ReleaseJob3Activity
-import com.example.mydesignapplication.releasejob.releasejob4.ReleaseJob4Activity
+import com.example.mydesignapplication.ui.releasejob.releasejob1.ReleaseJob1Activity
 import com.example.mydesignapplication.utils.StatusBarUtils
 
 class MainActivity : AppCompatActivity() {
@@ -99,7 +100,7 @@ class MainActivity : AppCompatActivity() {
             initCurrentIndex(3)
         }
         releaseLayout.setOnClickListener {
-            val intent = Intent(this, ReleaseJob4Activity::class.java)
+            val intent = Intent(this, ReleaseJob1Activity::class.java)
             startActivity(intent)
         }
 
@@ -187,5 +188,18 @@ class MainActivity : AppCompatActivity() {
 
     private fun <T : View> f(id: Int): T {
         return findViewById(id)
+    }
+
+    companion object {
+
+        const val PARAM_EMPLOYER_ACCOUNT_BEAN = "employer_account_bean"
+        var EMPLOYER_ACCOUNT_BEAN: EmployerAccountBean? = null
+
+        fun actionStart(context: Context, employerAccountBean: EmployerAccountBean) {
+            val intent = Intent(context, MainActivity::class.java)
+            intent.putExtra(PARAM_EMPLOYER_ACCOUNT_BEAN, employerAccountBean)
+            EMPLOYER_ACCOUNT_BEAN = employerAccountBean
+            context.startActivity(intent)
+        }
     }
 }

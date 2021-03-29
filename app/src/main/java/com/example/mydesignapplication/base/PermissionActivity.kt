@@ -1,4 +1,4 @@
-package com.example.mydesign.base
+package com.example.mydesignapplication.base
 
 import android.Manifest
 import android.content.Intent
@@ -30,16 +30,16 @@ abstract class PermissionActivity : AppCompatActivity() {
 //        }
 //    }
 
-    protected fun checkPermission(permission: String) {
+    protected fun checkPermission(permission: String, tag: Int = 0) {
         val i = ContextCompat.checkSelfPermission(this, permission)
         if (i != PackageManager.PERMISSION_GRANTED) {
             getPermission(permission)
         } else {
-            doOnGetPermission(permission)
+            doOnGetPermission(permission, tag)
         }
     }
 
-    open fun doOnGetPermission(permission: String) {
+    open fun doOnGetPermission(permission: String, tag: Int = 0) {
 
 
     }
