@@ -4,6 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".ui.persionalinfo.PersonalInfoActivity">
 
+    <data>
+
+        <variable
+            name="personalInfoBean"
+            type="com.example.mydesignapplication.data.bean.PersonalInfoBean" />
+    </data>
+
     <ScrollView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
@@ -50,6 +57,7 @@
                     android:textSize="16sp" />
 
                 <TextView
+                    android:id="@+id/activity_personal_save_bt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical|end"
@@ -68,10 +76,10 @@
 
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/activity_personal_head_img_img"
+                    imageFromUrl="@{personalInfoBean.employerPersonalInfoHead}"
                     android:layout_width="64dp"
                     android:layout_height="64dp"
-                    android:layout_gravity="center"
-                    android:src="@drawable/ic_head" />
+                    android:layout_gravity="center" />
 
             </FrameLayout>
 
@@ -106,6 +114,7 @@
                         android:layout_marginLeft="8dp"
                         android:background="@null"
                         android:hint="请输入姓名"
+                        android:text="@{personalInfoBean.employerPersonalInfoName}"
                         android:textSize="14sp" />
 
                 </LinearLayout>
@@ -139,6 +148,7 @@
                         android:background="@null"
                         android:hint="请输入身份证号"
                         android:inputType="number"
+                        android:text="@{personalInfoBean.employerPersonalInfoIdCardNum}"
                         android:textSize="14sp" />
 
                 </LinearLayout>
@@ -167,6 +177,7 @@
 
                 <ImageView
                     android:id="@+id/activity_personal_card_front_img"
+                    imageFromUrl="@{personalInfoBean.employerPersonalInfoIdCardFront}"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
                     android:layout_marginLeft="16dp"
@@ -208,6 +219,7 @@
 
                 <ImageView
                     android:id="@+id/activity_personal_card_back_img"
+                    imageFromUrl="@{personalInfoBean.employerPersonalInfoIdCardBack}"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
                     android:layout_marginLeft="16dp"

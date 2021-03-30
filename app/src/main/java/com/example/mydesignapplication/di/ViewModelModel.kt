@@ -6,6 +6,7 @@ import com.example.mydesignapplication.common.MyViewModelFactory
 import com.example.mydesignapplication.ui.companyInfo.CompanyInformationViewModel
 import com.example.mydesignapplication.ui.login.LoginViewModel
 import com.example.mydesignapplication.ui.login.RegisterViewModel
+import com.example.mydesignapplication.ui.persionalinfo.PersonalInfoViewModel
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
@@ -27,6 +28,12 @@ abstract class ViewModelModel {
     @IntoMap
     @ViewModelKey(CompanyInformationViewModel::class)
     abstract fun bindCompanyInformationViewModel(companyInformationViewModel: CompanyInformationViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(PersonalInfoViewModel::class)
+    abstract fun bindPersonalInfoViewModel(personalInfoViewModel: PersonalInfoViewModel): ViewModel
+
 
     @Binds
     abstract fun bindViewModelFactory(factory: MyViewModelFactory): ViewModelProvider.Factory

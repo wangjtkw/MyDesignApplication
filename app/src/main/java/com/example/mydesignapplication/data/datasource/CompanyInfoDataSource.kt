@@ -45,7 +45,7 @@ class CompanyInfoDataSource @Inject constructor(
             }
 
             override fun loadFromDb(): LiveData<CompanyInfoBean> {
-                return db.companyInfoDao().selectByAccount(companyInfoId)
+                return db.companyInfoDao().selectById(companyInfoId)
             }
 
             override fun shouldFetch(data: CompanyInfoBean?): Boolean {
@@ -61,8 +61,6 @@ class CompanyInfoDataSource @Inject constructor(
                     }
                 }
             }
-
-
         }.asLiveData()
     }
 

@@ -16,11 +16,11 @@ data class CompanyInfoBean(
     @Json(name = "employerCompanyInfoBusinessScope")
     val employerCompanyInfoBusinessScope: String,
     @Json(name = "employerCompanyInfoBusinessState")
-    val employerCompanyInfoBusinessState: String,
+    var employerCompanyInfoBusinessState: String = "请选择",
     @Json(name = "employerCompanyInfoCompanyType")
-    val employerCompanyInfoCompanyType: String,
+    var employerCompanyInfoCompanyType: String = "请选择",
     @Json(name = "employerCompanyInfoFoundTime")
-    val employerCompanyInfoFoundTime: String,
+    var employerCompanyInfoFoundTime: String = "请选择",
     @Json(name = "employerCompanyInfoOrganizationCode")
     val employerCompanyInfoOrganizationCode: String,
     @Json(name = "employerCompanyInfoRegisterAddress")

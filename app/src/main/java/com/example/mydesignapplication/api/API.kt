@@ -4,7 +4,9 @@ import androidx.lifecycle.LiveData
 import com.example.mydesignapplication.data.bean.CompanyInfoBean
 import com.example.mydesignapplication.data.bean.EmployerAccountBean
 import com.example.mydesignapplication.data.bean.MyResponse
+import com.example.mydesignapplication.data.bean.PersonalInfoBean
 import okhttp3.MediaType
+import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.http.*
 import java.io.File
@@ -54,7 +56,23 @@ interface API {
 
     @Multipart
     @POST("employer/insert/personalInfo")
-    fun insertPersonalInfo(@PartMap params: Map<String, RequestBody>): LiveData<ApiResponse<MyResponse<EmployerAccountBean>>>
+    fun insertPersonalInfo(
+        @Part headImg: MultipartBody.Part,
+        @Part frontImg: MultipartBody.Part,
+        @Part backImg: MultipartBody.Part,
+        @PartMap params: Map<String, RequestBody>,
+    ): LiveData<ApiResponse<MyResponse<EmployerAccountBean>>>
 
+    @GET("employer/get/personalInfo")
+    fun getPersonalInfo(@Query("personalInfoId") personalInfoId: Int): LiveData<ApiResponse<MyResponse<PersonalInfoBean>>>
+
+    @Multipart
+    @POST("employer/update/personalInfo")
+    fun updatePersonalInfo(
+        @Part headImg: MultipartBody.Part?,
+        @Part frontImg: MultipartBody.Part?,
+        @Part backImg: MultipartBody.Part?,
+        @PartMap params: Map<String, RequestBody>,
+    ): LiveData<ApiResponse<MyResponse<PersonalInfoBean>>>
 
 }
