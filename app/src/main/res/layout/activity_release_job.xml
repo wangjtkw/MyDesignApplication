@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".releasejob.releasejob1.ReleaseJob1Activity">
+    tools:context=".ui.releasejob.releasejob1.ReleaseJob1Activity">
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -80,6 +80,7 @@
                     android:textSize="14sp" />
 
                 <FrameLayout
+                    android:id="@+id/activity_release_job_position_title_layout"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_marginStart="12dp"
@@ -87,6 +88,7 @@
                     android:layout_weight="1">
 
                     <EditText
+                        android:id="@+id/activity_release_job_position_title_edit_text"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_gravity="center_vertical|end"
@@ -116,6 +118,7 @@
                     android:textSize="14sp" />
 
                 <LinearLayout
+                    android:id="@+id/activity_release_job_content_clear_layout"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical|end">
@@ -135,6 +138,7 @@
             </FrameLayout>
 
             <FrameLayout
+                android:id="@+id/activity_release_job_content_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="16dp"
@@ -152,6 +156,7 @@
                 <requestFocus />
 
                 <EditText
+                    android:id="@+id/activity_release_job_content_edit_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="16dp"
@@ -176,16 +181,19 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="16dp"
-                    android:text="招聘人数" />
+                    android:text="招聘人数"
+                    android:layout_marginStart="16dp" />
 
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical|end"
                     android:layout_marginRight="16dp"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:layout_marginEnd="16dp">
 
                     <EditText
+                        android:id="@+id/activity_release_job_person_number_edit_text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:background="@null"
@@ -206,6 +214,7 @@
             </FrameLayout>
 
             <Button
+                android:id="@+id/activity_release_job_next_step_button"
                 android:layout_width="match_parent"
                 android:layout_height="55dp"
                 android:layout_marginLeft="16dp"

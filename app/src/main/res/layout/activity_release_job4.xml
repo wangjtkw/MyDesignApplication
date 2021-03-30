@@ -5,14 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".releasejob.releasejob4.ReleaseJob4Activity">
+    tools:context=".ui.releasejob.releasejob4.ReleaseJob4Activity">
 
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize">
 
         <FrameLayout
-            android:id="@+id/activity_release_job3_back_layout"
+            android:id="@+id/activity_release_job4_back_layout"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="start"
@@ -63,13 +63,15 @@
             android:textSize="12sp" />
 
         <LinearLayout
+            android:id="@+id/activity_release_job4_industry_layout"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="end"
-            android:layout_margin="16dp"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:padding="16dp">
 
             <TextView
+                android:id="@+id/activity_release_job4_industry_text_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
@@ -102,6 +104,7 @@
             android:textSize="12sp" />
 
         <LinearLayout
+            android:id="@+id/activity_release_job4_region_layout"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="end"
@@ -109,6 +112,7 @@
             android:orientation="horizontal">
 
             <TextView
+                android:id="@+id/activity_release_job4_region_text_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
@@ -125,7 +129,7 @@
     </FrameLayout>
 
     <Button
-        android:id="@+id/activity_release_job2_next_step_button"
+        android:id="@+id/activity_release_job4_release_button"
         android:layout_width="match_parent"
         android:layout_height="55dp"
         android:layout_marginLeft="16dp"
@@ -137,7 +141,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="确认后不可修改，请认真选择。"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="8dp"/>
+        android:layout_marginTop="8dp"
+        android:text="确认后不可修改，请认真选择。" />
 </LinearLayout>
