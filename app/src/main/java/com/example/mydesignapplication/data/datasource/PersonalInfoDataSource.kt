@@ -60,12 +60,32 @@ class PersonalInfoDataSource @Inject constructor(
     }
 
     fun updatePersonalInfo(
-        param: HashMap<String, RequestBody>,
-        headImg: MultipartBody.Part?,
-        frontImg: MultipartBody.Part?,
-        backImg: MultipartBody.Part?
+        name: String,
+        idNum: String,
+        personalInfoId: Int
     ): LiveData<ApiResponse<MyResponse<PersonalInfoBean>>> {
-        return api.updatePersonalInfo(headImg, frontImg, backImg, param)
+        return api.updatePersonalInfo(name, idNum, personalInfoId)
+    }
+
+    suspend fun updatePersonalInfoHeadImg(
+        headImg: MultipartBody.Part,
+        param: HashMap<String, RequestBody>,
+    ): LiveData<ApiResponse<MyResponse<Any>>> {
+        return api.updatePersonalInfoHeadImg(headImg, param)
+    }
+
+    suspend fun updatePersonalInfoFrontImg(
+        frontImg: MultipartBody.Part,
+        param: HashMap<String, RequestBody>,
+    ): LiveData<ApiResponse<MyResponse<Any>>> {
+        return api.updatePersonalInfoFrontImg(frontImg, param);
+    }
+
+    suspend fun updatePersonalInfoBackImg(
+        backImg: MultipartBody.Part,
+        param: HashMap<String, RequestBody>,
+    ): LiveData<ApiResponse<MyResponse<Any>>> {
+        return api.updatePersonalInfoBackImg(backImg, param);
     }
 
     fun updatePersonalInfoDB(scope: CoroutineScope, personalInfoBean: PersonalInfoBean) {

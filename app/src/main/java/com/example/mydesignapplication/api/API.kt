@@ -66,13 +66,32 @@ interface API {
     @GET("employer/get/personalInfo")
     fun getPersonalInfo(@Query("personalInfoId") personalInfoId: Int): LiveData<ApiResponse<MyResponse<PersonalInfoBean>>>
 
-    @Multipart
     @POST("employer/update/personalInfo")
     fun updatePersonalInfo(
-        @Part headImg: MultipartBody.Part?,
-        @Part frontImg: MultipartBody.Part?,
-        @Part backImg: MultipartBody.Part?,
-        @PartMap params: Map<String, RequestBody>,
+        @Query("name") name: String,
+        @Query("idNum") idNum: String,
+        @Query("personalId") personalId: Int
     ): LiveData<ApiResponse<MyResponse<PersonalInfoBean>>>
+
+    @Multipart
+    @POST("employer/update/personalInfo/headImg")
+    fun updatePersonalInfoHeadImg(
+        @Part headImg: MultipartBody.Part,
+        @PartMap params: Map<String, RequestBody>,
+    ): LiveData<ApiResponse<MyResponse<Any>>>
+
+    @Multipart
+    @POST("employer/update/personalInfo/frontImg")
+    fun updatePersonalInfoFrontImg(
+        @Part frontImg: MultipartBody.Part,
+        @PartMap params: Map<String, RequestBody>,
+    ): LiveData<ApiResponse<MyResponse<Any>>>
+
+    @Multipart
+    @POST("employer/update/personalInfo/backImg")
+    fun updatePersonalInfoBackImg(
+        @Part backImg: MultipartBody.Part,
+        @PartMap params: Map<String, RequestBody>,
+    ): LiveData<ApiResponse<MyResponse<Any>>>
 
 }

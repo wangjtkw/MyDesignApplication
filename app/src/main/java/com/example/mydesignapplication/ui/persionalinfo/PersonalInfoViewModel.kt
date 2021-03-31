@@ -1,7 +1,6 @@
 package com.example.mydesignapplication.ui.persionalinfo
 
 import android.util.Log
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -19,7 +18,6 @@ import com.example.mydesignapplication.utils.HttpUtil
 import com.example.mydesignapplication.utils.ToastUtil
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import okhttp3.MultipartBody
 import javax.inject.Inject
 
 class PersonalInfoViewModel @Inject constructor(
@@ -30,6 +28,11 @@ class PersonalInfoViewModel @Inject constructor(
 
     val insertPersonalInfoResult = MediatorLiveData<ApiResponse<MyResponse<EmployerAccountBean>>>()
     val updatePersonalInfoResult = MediatorLiveData<ApiResponse<MyResponse<PersonalInfoBean>>>()
+
+    val updatePersonalInfoHeadImgResult = MediatorLiveData<ApiResponse<MyResponse<Any>>>()
+    val updatePersonalInfoFrontImgResult = MediatorLiveData<ApiResponse<MyResponse<Any>>>()
+    val updatePersonalInfoBackImgResult = MediatorLiveData<ApiResponse<MyResponse<Any>>>()
+
 
     fun insertPersonalInfo(
         accountId: Int,
@@ -42,18 +45,23 @@ class PersonalInfoViewModel @Inject constructor(
     ) {
         if (headImg == null) {
             makeToast("头像还未选择！")
+            return
         }
         if (frontImg == null) {
             makeToast("身份证正面还未选择！")
+            return
         }
         if (backImg == null) {
             makeToast("身份证背面还未选择！")
+            return
         }
         if (name.isEmpty()) {
             makeToast("请输入您的姓名！")
+            return
         }
         if (idNum.isEmpty()) {
             makeToast("请输入您的身份证号！")
+            return
         }
         val httpUtil = HttpUtil()
         httpUtil.apply {
@@ -105,42 +113,21 @@ class PersonalInfoViewModel @Inject constructor(
 
     fun updatePersonalInfo(
         personalInfoId: Int,
-        headImg: AlbumBean?,
-        frontImg: AlbumBean?,
-        backImg: AlbumBean?,
         name: String,
         idNum: String,
         callback: () -> Unit
     ) {
         if (name.isEmpty()) {
             makeToast("请输入您的姓名！")
+            return
         }
         if (idNum.isEmpty()) {
             makeToast("请输入您的身份证号！")
+            return
         }
-        val httpUtil = HttpUtil()
-        httpUtil.apply {
-            addParameter("name", name)
-            addParameter("idNum", idNum)
-            addParameter("personalId", personalInfoId)
-        }
-
-        var headImgPart: MultipartBody.Part? = httpUtil.buildFile("headImg", headImg?.DATA)
-        var frontImgPart: MultipartBody.Part? = httpUtil.buildFile("frontImg", frontImg?.DATA)
-        var backImgPart: MultipartBody.Part? = httpUtil.buildFile("backImg", backImg?.DATA)
-//        if (headImg != null) {
-//            headImgPart =
-//        }
-//        if (frontImg != null) {
-//            frontImgPart =
-//        }
-//        if (backImg != null) {
-//            backImgPart =
-//        }
         viewModelScope.launch(Dispatchers.IO) {
             val result = personalInfoDataSource.updatePersonalInfo(
-                param = httpUtil.params,
-                headImgPart, frontImgPart, backImgPart
+                name, idNum, personalInfoId
             )
             launch(Dispatchers.Main) {
                 updatePersonalInfoResult.addSource(result) {
@@ -172,6 +159,122 @@ class PersonalInfoViewModel @Inject constructor(
         }
     }
 
+    fun updatePersonalInfoHeadImg(headImg: AlbumBean?, personalInfoId: Int) {
+        if (headImg == null) {
+            makeToast("头像还未选择！")
+            return
+        }
+        val httpUtil = HttpUtil()
+        httpUtil.apply {
+            addParameter("personalId", personalInfoId)
+        }
+        val headImgPart = httpUtil.buildFile("headImg", headImg.DATA!!)
+        viewModelScope.launch(Dispatchers.IO) {
+            val result =
+                personalInfoDataSource.updatePersonalInfoHeadImg(headImgPart, httpUtil.params)
+            launch(Dispatchers.Main) {
+                updatePersonalInfoHeadImgResult.addSource(result) {
+                    when (it) {
+                        is ApiSuccessResponse -> {
+                            if (it.body.code != 200) {
+                                makeToast("发生错误：${it.body.description}")
+                            } else {
+                                makeToast("上传成功")
+                            }
+                        }
+                        is ApiEmptyResponse -> {
+                            makeToast("保存失败！")
+                        }
+                        is ApiErrorResponse -> {
+                            makeToast("发生错误：${it.errorMessage}")
+                        }
+                        else -> {
+                            makeToast("失败！")
+                        }
+                    }
+                }
+            }
+        }
+
+    }
+
+    fun updatePersonalInfoFrontImg(frontImg: AlbumBean?, personalInfoId: Int) {
+        if (frontImg == null) {
+            makeToast("身份证正面还未选择！")
+            return
+        }
+        val httpUtil = HttpUtil()
+        httpUtil.apply {
+            addParameter("personalId", personalInfoId)
+        }
+        val frontImgPart = httpUtil.buildFile("frontImg", frontImg.DATA!!)
+        viewModelScope.launch(Dispatchers.IO) {
+            val result =
+                personalInfoDataSource.updatePersonalInfoFrontImg(frontImgPart, httpUtil.params)
+            launch(Dispatchers.Main) {
+                updatePersonalInfoFrontImgResult.addSource(result) {
+                    when (it) {
+                        is ApiSuccessResponse -> {
+                            if (it.body.code != 200) {
+                                makeToast("发生错误：${it.body.description}")
+                            } else {
+                                makeToast("上传成功")
+                            }
+                        }
+                        is ApiEmptyResponse -> {
+                            makeToast("保存失败！")
+                        }
+                        is ApiErrorResponse -> {
+                            makeToast("发生错误：${it.errorMessage}")
+                        }
+                        else -> {
+                            makeToast("失败！")
+                        }
+                    }
+                }
+            }
+        }
+
+    }
+
+    fun updatePersonalInfoBackImg(backImg: AlbumBean?, personalInfoId: Int) {
+        if (backImg == null) {
+            makeToast("头像还未选择！")
+            return
+        }
+        val httpUtil = HttpUtil()
+        httpUtil.apply {
+            addParameter("personalId", personalInfoId)
+        }
+        val backImgPart = httpUtil.buildFile("backImg", backImg.DATA!!)
+        viewModelScope.launch(Dispatchers.IO) {
+            val result =
+                personalInfoDataSource.updatePersonalInfoBackImg(backImgPart, httpUtil.params)
+            launch(Dispatchers.Main) {
+                updatePersonalInfoHeadImgResult.addSource(result) {
+                    when (it) {
+                        is ApiSuccessResponse -> {
+                            if (it.body.code != 200) {
+                                makeToast("发生错误：${it.body.description}")
+                            } else {
+                                makeToast("上传成功")
+                            }
+                        }
+                        is ApiEmptyResponse -> {
+                            makeToast("保存失败！")
+                        }
+                        is ApiErrorResponse -> {
+                            makeToast("发生错误：${it.errorMessage}")
+                        }
+                        else -> {
+                            makeToast("失败！")
+                        }
+                    }
+                }
+            }
+        }
+
+    }
 
 
     private fun makeToast(msg: String) {
