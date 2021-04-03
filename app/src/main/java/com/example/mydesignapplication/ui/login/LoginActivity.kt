@@ -12,11 +12,10 @@ import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
-import com.example.mydesignapplication.MainActivity
+import com.example.mydesignapplication.ui.MainActivity
 import com.example.mydesignapplication.R
 import com.example.mydesignapplication.data.bean.Status
 import com.example.mydesignapplication.databinding.ActivityLoginBinding
-import com.example.mydesignapplication.databinding.ActivityRegisterBinding
 import com.example.mydesignapplication.ui.companyInfo.CompanyInformationActivity
 import dagger.android.AndroidInjection
 import dagger.android.AndroidInjector

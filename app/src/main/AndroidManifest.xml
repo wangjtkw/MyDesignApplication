@@ -5,7 +5,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
     <application
@@ -28,7 +28,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.companyInfo.CompanyInformationActivity" >
+        <activity android:name=".ui.companyInfo.CompanyInformationActivity">
 
         </activity>
         <activity android:name=".ui.releasejob.releasejob3.PersonnelRequirementActivity" />
@@ -39,7 +39,9 @@
             android:name=".ui.releasejob.releasejob1.ReleaseJob1Activity"
             android:label="@string/title_activity_release_job"
             android:theme="@style/MyTheme.NoActionBar" />
-        <activity android:name=".MainActivity"></activity>
+        <activity
+            android:name=".ui.MainActivity"
+            android:launchMode="singleTask" />
         <activity android:name=".ui.album.AlbumActivity" />
     </application>
 

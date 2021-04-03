@@ -94,4 +94,37 @@ interface API {
         @PartMap params: Map<String, RequestBody>,
     ): LiveData<ApiResponse<MyResponse<Any>>>
 
+
+    @Multipart
+    @POST("employer/insert/positionInfo")
+    fun releaseJob(
+        @Part positionImg: MultipartBody.Part,
+        @PartMap params: Map<String, RequestBody>,
+    ): LiveData<ApiResponse<MyResponse<Any>>>
+
+//    @POST("insert/positionInfo")
+    
+//    fun releaseJob(
+//        @Query("employerAccountId") employerAccountId: Int,
+//        @Query("employerPositionTitle") employerPositionTitle: String,
+//        @Query("employerPositionContent") employerPositionContent: String,
+//        @Query("employerPositionPersonNum") employerPositionPersonNum: String,
+//        @Query("employerPositionSalary") employerPositionSalary: String,
+//        @Query("employerPositionSettlement") employerPositionSettlement: String,
+//        @Query("employerPositionWelfare") employerPositionWelfare: String,
+//        @Query("employerPositionPlace") employerPositionPlace: String,
+//        @Query("employerPositionDate") employerPositionDate: String,
+//        @Query("employerPositionConnectType") employerPositionConnectType: String,
+//        @Query("employerPositionConnectInfo") employerPositionConnectInfo: String,
+//        @Query("employerPositionPersonRequirements") employerPositionPersonRequirements: String,
+//        @Query("employerPositionIndustry") employerPositionIndustry: String,
+//        @Query("employerPositionCity") employerPositionCity: String,
+//        @Query("addPositionRequirement") addPositionRequirement: Boolean,
+//        @Query("positionRequirementAge") positionRequirementAge: String,
+//        @Query("positionRequirementSex") positionRequirementSex: String,
+//        @Query("positionRequirementHeight") positionRequirementHeight: String,
+//        @Query("positionRequirementEducation") positionRequirementEducation: String,
+//    ): LiveData<ApiResponse<MyResponse<Any>>>
+
+
 }

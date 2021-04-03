@@ -29,6 +29,12 @@ class HttpUtil {
                 o.toString()
             )
             params[key] = body
+        }else if (o is Boolean){
+            val body: RequestBody = RequestBody.create(
+                "text/plain;charset=UTF-8".toMediaTypeOrNull(),
+                o.toString()
+            )
+            params[key] = body
         }
     }
 

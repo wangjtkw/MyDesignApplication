@@ -1,9 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="personalInfo"
+            type="com.example.mydesignapplication.data.bean.PersonalInfoBean" />
+    </data>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/grey_background"
@@ -26,7 +35,7 @@
                     android:id="@+id/fragment_mine_name_text_view"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="青团商家"
+                    android:text="@{personalInfo.employerPersonalInfoName,default=青团商家}"
                     android:textSize="16sp"
                     android:textStyle="bold" />
 
@@ -35,26 +44,20 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="未完成个人认证，去认证 >"
-                    android:textSize="12sp" />
+                    android:textSize="12sp"
+                    android:visibility="@{personalInfo == null ?View.VISIBLE :View.GONE}" />
 
             </LinearLayout>
 
-            <androidx.cardview.widget.CardView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical|end"
-                android:layout_marginEnd="16dp"
-                android:layout_marginRight="16dp"
-                app:cardCornerRadius="180dp">
-
-                <ImageView
-                    android:id="@+id/fragment_mine_head_image_view"
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
-                    android:background="@color/black"
-                    android:scaleType="centerCrop"
-                    android:src="@color/black" />
-            </androidx.cardview.widget.CardView>
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/fragment_mine_head_image_view"
+                imageFromUrl="@{personalInfo.employerPersonalInfoHead}"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:layout_gravity="end|center_vertical"
+                android:layout_marginEnd="32dp"
+                android:layout_marginRight="32dp"
+                android:src="@drawable/ic_head" />
 
 
         </FrameLayout>

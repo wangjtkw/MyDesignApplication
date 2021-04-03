@@ -5,14 +5,25 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.*
+import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mydesignapplication.R
+import com.example.mydesignapplication.data.bean.PersonalInfoBean
+import com.example.mydesignapplication.data.bean.PositionTempBean
+import com.example.mydesignapplication.databinding.ActivityReleaseJob2Binding
+import com.example.mydesignapplication.databinding.ActivityReleaseJobBinding
 import com.example.mydesignapplication.dialog.SingleDataDialogUtil
 import com.example.mydesignapplication.dialog.WelfareDialogUtil
 import com.example.mydesignapplication.ui.releasejob.releasejob3.ReleaseJob3Activity
+import com.example.mydesignapplication.utils.ToastUtil
+import dagger.android.AndroidInjection
+import dagger.android.AndroidInjector
+import dagger.android.DispatchingAndroidInjector
+import dagger.android.HasAndroidInjector
+import javax.inject.Inject
 
-class ReleaseJob2Activity : AppCompatActivity() {
+class ReleaseJob2Activity : AppCompatActivity(), HasAndroidInjector {
     private lateinit var backLayout: FrameLayout
     private lateinit var salaryEditText: EditText
     private lateinit var salaryUnitLayout: LinearLayout
@@ -25,16 +36,23 @@ class ReleaseJob2Activity : AppCompatActivity() {
     private val salaryUnitList = ArrayList<String>()
     private lateinit var salaryUnitCallback: ((Int) -> Unit)
     private val settlementList = ArrayList<String>()
-    private lateinit var settlementAdapter: SettlementRecyclerAdapter
+    private var settlementAdapter: SettlementRecyclerAdapter? = null
     private val welfareList = ArrayList<String>()
     private lateinit var welfareAdapter: WelfareRecyclerAdapter
 
     private lateinit var welfareCallback: ((String) -> Unit)
 
+    @Inject
+    lateinit var dispatchingAndroidInjector: DispatchingAndroidInjector<Any>
+    override fun androidInjector(): AndroidInjector<Any> = dispatchingAndroidInjector
+
+    private var mBinding: ActivityReleaseJob2Binding? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        AndroidInjection.inject(this)
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_release_job2)
+        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_release_job2)
+
         init()
     }
 
@@ -48,11 +66,30 @@ class ReleaseJob2Activity : AppCompatActivity() {
         welfareRecyclerView = f(R.id.activity_release_job2_welfare_recycler_view)
         nextStepButton = f(R.id.activity_release_job2_next_step_button)
         initData()
+        observeData()
         setListener()
         initListener()
 
         initSettlementRecycler()
         initWelfareRecycler()
+    }
+
+    private fun observeData() {
+        PositionTempBean.apply {
+            employerPositionSalary.observe(this@ReleaseJob2Activity) {
+                mBinding!!.employerPositionSalary = it
+            }
+            employerPositionSalaryUnit.observe(this@ReleaseJob2Activity) {
+                mBinding!!.activityReleaseJob2SalaryUnitTextView.text =
+                    salaryUnitList[employerPositionSalaryUnitIndex]
+            }
+            employerPositionSettlementIndex.observe(this@ReleaseJob2Activity) {
+                if (settlementAdapter != null) {
+                    settlementAdapter!!.setIndex(it)
+                }
+            }
+
+        }
     }
 
     private fun initData() {
@@ -80,22 +117,48 @@ class ReleaseJob2Activity : AppCompatActivity() {
     }
 
     private fun initListener() {
-        backLayout.setOnClickListener {
+        mBinding!!.activityReleaseJob2BackLayout.setOnClickListener {
             finish()
         }
         nextStepButton.setOnClickListener {
-            val intent = Intent(this, ReleaseJob3Activity::class.java)
-            startActivity(intent)
+            if (check()) {
+                val intent = Intent(this, ReleaseJob3Activity::class.java)
+                startActivity(intent)
+            }
         }
+    }
+
+    private fun check(): Boolean {
+        val salary = mBinding!!.activityReleaseJob2SalaryEditText.text.toString()
+        val salaryUnit = mBinding!!.activityReleaseJob2SalaryUnitTextView.text.toString()
+        val currentIndex = settlementAdapter?.getIndex() ?: 3
+        if (salary.isEmpty()) {
+            ToastUtil.makeToast("请输入薪水！")
+            return false
+        }
+        PositionTempBean.apply {
+            employerPositionSalary.value = salary
+            employerPositionSalaryUnit.value = salaryUnit
+            employerPositionSettlement.value = settlementList[currentIndex]
+            employerPositionSettlementIndex.value = currentIndex
+
+        }
+        return true
     }
 
 
     private fun setListener() {
         salaryUnitCallback = {
             salaryUnitTextView.text = salaryUnitList[it]
+            PositionTempBean.employerPositionSalaryUnitIndex = it
         }
         salaryUnitLayout.setOnClickListener {
-            SingleDataDialogUtil().init(this, salaryUnitList, salaryUnitCallback)
+            SingleDataDialogUtil().init(
+                this,
+                salaryUnitList,
+                salaryUnitCallback,
+                PositionTempBean.employerPositionSalaryUnitIndex
+            )
         }
         welfareCallback = {
             welfareList.add(it)
@@ -108,7 +171,7 @@ class ReleaseJob2Activity : AppCompatActivity() {
 
     private fun initSettlementRecycler() {
         settlementAdapter = SettlementRecyclerAdapter()
-        settlementAdapter.addData(settlementList)
+        settlementAdapter!!.addData(settlementList)
         settlementMethodRecyclerView.adapter = settlementAdapter
         settlementMethodRecyclerView.layoutManager = GridLayoutManager(this, 3)
     }

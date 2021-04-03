@@ -22,6 +22,7 @@ class SingleDataDialogUtil {
         context: Context,
         pickerViewData: List<String>,
         determineCallback: (Int) -> Unit,
+        index: Int = 0,
         pickerViewCallback: (String) -> Unit = {},
     ) {
         singleDataDialog = Dialog(context, R.style.ChooseHeadImageDialog)
@@ -44,6 +45,7 @@ class SingleDataDialogUtil {
         dialogWindow?.setGravity(Gravity.BOTTOM)
         dialogWindow?.attributes = layoutParams
         singleDataPickerView.setData(pickerViewData)
+        singleDataPickerView.setSelectIndex(index)
         singleDataDialog.show()
         setPickerViewListener { pickerViewCallback(it) }
         setCancelListener()

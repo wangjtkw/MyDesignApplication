@@ -16,6 +16,7 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import java.io.UnsupportedEncodingException
+import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
 @Module(includes = [ViewModelModel::class])
@@ -37,7 +38,12 @@ class AppModel {
     @Singleton
     @Provides
     fun provideOkHttp(httpLoggingInterceptor: HttpLoggingInterceptor): OkHttpClient {
-        return OkHttpClient.Builder().addInterceptor(httpLoggingInterceptor).build()
+        return OkHttpClient.Builder()
+            .connectTimeout(10,TimeUnit.SECONDS)
+            .readTimeout(10, TimeUnit.SECONDS) //读取超时
+            .writeTimeout(10, TimeUnit.SECONDS)
+            .callTimeout(10,TimeUnit.SECONDS)
+            .addInterceptor(httpLoggingInterceptor).build()
     }
 
     @Singleton

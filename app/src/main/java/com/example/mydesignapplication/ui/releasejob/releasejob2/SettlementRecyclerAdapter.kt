@@ -23,6 +23,11 @@ class SettlementRecyclerAdapter : RecyclerView.Adapter<SettlementViewHolder>() {
         return currentIndex
     }
 
+    fun setIndex(index:Int){
+        currentIndex = index
+        notifyDataSetChanged()
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SettlementViewHolder {
         val view: View =
             LayoutInflater.from(parent.context)

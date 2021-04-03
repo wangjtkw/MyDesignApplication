@@ -6,7 +6,9 @@ import com.example.mydesignapplication.common.MyViewModelFactory
 import com.example.mydesignapplication.ui.companyInfo.CompanyInformationViewModel
 import com.example.mydesignapplication.ui.login.LoginViewModel
 import com.example.mydesignapplication.ui.login.RegisterViewModel
+import com.example.mydesignapplication.ui.mine.MineViewModel
 import com.example.mydesignapplication.ui.persionalinfo.PersonalInfoViewModel
+import com.example.mydesignapplication.ui.releasejob.releasejob4.ReleaseJob4ViewModel
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
@@ -34,6 +36,15 @@ abstract class ViewModelModel {
     @ViewModelKey(PersonalInfoViewModel::class)
     abstract fun bindPersonalInfoViewModel(personalInfoViewModel: PersonalInfoViewModel): ViewModel
 
+    @Binds
+    @IntoMap
+    @ViewModelKey(MineViewModel::class)
+    abstract fun bindMineViewModel(mineViewModel: MineViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(ReleaseJob4ViewModel::class)
+    abstract fun bindReleaseJob4ViewModel(releaseJob1ViewModel: ReleaseJob4ViewModel): ViewModel
 
     @Binds
     abstract fun bindViewModelFactory(factory: MyViewModelFactory): ViewModelProvider.Factory

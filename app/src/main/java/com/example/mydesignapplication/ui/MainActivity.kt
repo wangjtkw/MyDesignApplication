@@ -1,4 +1,4 @@
-package com.example.mydesignapplication
+package com.example.mydesignapplication.ui
 
 
 import android.content.Context
@@ -14,6 +14,7 @@ import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2
+import com.example.mydesignapplication.R
 import com.example.mydesignapplication.data.bean.EmployerAccountBean
 import com.example.mydesignapplication.ui.candidate.CandidateFragment
 import com.example.mydesignapplication.ui.mine.MineFragment
@@ -21,8 +22,13 @@ import com.example.mydesignapplication.ui.post.PostFragment
 import com.example.mydesignapplication.publicclass.ViewPagerAdapter
 import com.example.mydesignapplication.ui.releasejob.releasejob1.ReleaseJob1Activity
 import com.example.mydesignapplication.utils.StatusBarUtils
+import dagger.android.AndroidInjection
+import dagger.android.AndroidInjector
+import dagger.android.DispatchingAndroidInjector
+import dagger.android.HasAndroidInjector
+import javax.inject.Inject
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), HasAndroidInjector {
     private lateinit var viewPager: ViewPager2
     private lateinit var candidateLayout: LinearLayout
     private lateinit var candidateImg: ImageView
@@ -41,8 +47,14 @@ class MainActivity : AppCompatActivity() {
     private val fragmentList = ArrayList<Fragment>()
     private lateinit var viewPagerAdapter: ViewPagerAdapter
 
+    @Inject
+    lateinit var dispatchingAndroidInjector: DispatchingAndroidInjector<Any>
+
+    override fun androidInjector(): AndroidInjector<Any> = dispatchingAndroidInjector
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        AndroidInjection.inject(this)
         super.onCreate(savedInstanceState)
         StatusBarUtils.setLightBar(this, Color.TRANSPARENT)
         setContentView(R.layout.activity_main)

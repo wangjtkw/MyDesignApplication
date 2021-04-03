@@ -13,6 +13,7 @@ import com.example.mydesignapplication.constants.BASE_URL
 fun bindImageFromUrl(view: ImageView, imageUrl: String?) {
     if (!imageUrl.isNullOrEmpty()) {
         val url = "${BASE_URL}uploadimg/${imageUrl}"
+        Log.d("bindImageFromUrl", "url:$url")
         Glide.with(view.context)
             .load(url)
             .error(R.drawable.ic_head)

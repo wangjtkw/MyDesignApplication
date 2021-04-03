@@ -32,8 +32,8 @@ class PostFragment : BaseFragment<FragmentPostBinding>() {
 
     private fun initTabLayout() {
         tabLayout.apply {
+            addTab(newTab().setText("待审核"))
             addTab(newTab().setText("招聘中"))
-            addTab(newTab().setText("待发布"))
             addTab(newTab().setText("已下线"))
         }
     }
