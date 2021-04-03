@@ -6,7 +6,8 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.post.PostPageFragment">
+        tools:context=".ui.post.PostPageFragment"
+        android:background="@color/gray_200">
 
         <FrameLayout
             android:id="@+id/post_page_release_job_layout"

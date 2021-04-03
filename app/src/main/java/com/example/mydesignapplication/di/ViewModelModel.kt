@@ -8,6 +8,7 @@ import com.example.mydesignapplication.ui.login.LoginViewModel
 import com.example.mydesignapplication.ui.login.RegisterViewModel
 import com.example.mydesignapplication.ui.mine.MineViewModel
 import com.example.mydesignapplication.ui.persionalinfo.PersonalInfoViewModel
+import com.example.mydesignapplication.ui.post.PostPageViewModel
 import com.example.mydesignapplication.ui.releasejob.releasejob4.ReleaseJob4ViewModel
 import dagger.Binds
 import dagger.Module
@@ -45,6 +46,12 @@ abstract class ViewModelModel {
     @IntoMap
     @ViewModelKey(ReleaseJob4ViewModel::class)
     abstract fun bindReleaseJob4ViewModel(releaseJob1ViewModel: ReleaseJob4ViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(PostPageViewModel::class)
+    abstract fun bindPostPageViewModel(postPageViewModel: PostPageViewModel): ViewModel
+
 
     @Binds
     abstract fun bindViewModelFactory(factory: MyViewModelFactory): ViewModelProvider.Factory

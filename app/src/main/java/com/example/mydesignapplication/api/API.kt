@@ -1,10 +1,7 @@
 package com.example.mydesignapplication.api
 
 import androidx.lifecycle.LiveData
-import com.example.mydesignapplication.data.bean.CompanyInfoBean
-import com.example.mydesignapplication.data.bean.EmployerAccountBean
-import com.example.mydesignapplication.data.bean.MyResponse
-import com.example.mydesignapplication.data.bean.PersonalInfoBean
+import com.example.mydesignapplication.data.bean.*
 import okhttp3.MediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -102,8 +99,14 @@ interface API {
         @PartMap params: Map<String, RequestBody>,
     ): LiveData<ApiResponse<MyResponse<Any>>>
 
+    @GET("employer/get/positionList")
+    fun getPositionList(
+        @Query("accountId") accountId: Int,
+        @Query("status") state: String
+    ): LiveData<ApiResponse<MyResponse<List<PositionInfoBean>>>>
+
 //    @POST("insert/positionInfo")
-    
+
 //    fun releaseJob(
 //        @Query("employerAccountId") employerAccountId: Int,
 //        @Query("employerPositionTitle") employerPositionTitle: String,
