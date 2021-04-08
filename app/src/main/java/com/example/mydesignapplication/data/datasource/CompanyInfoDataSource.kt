@@ -24,6 +24,7 @@ class CompanyInfoDataSource @Inject constructor(
         return companyInfoInsertBean.run {
             api.insertCompanyInfo(
                 accountId,
+                employerCompanyInfoName,
                 employerCompanyInfoCompanyType,
                 employerCompanyInfoBusinessState,
                 employerCompanyInfoFoundTime,
@@ -70,6 +71,7 @@ class CompanyInfoDataSource @Inject constructor(
         return companyInfoBean.run {
             api.updateCompanyInfo(
                 employerCompanyInfoId,
+                employerCompanyInfoName,
                 employerCompanyInfoCompanyType,
                 employerCompanyInfoBusinessState,
                 employerCompanyInfoFoundTime,

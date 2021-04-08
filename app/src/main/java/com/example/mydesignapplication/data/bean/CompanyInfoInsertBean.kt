@@ -9,6 +9,8 @@ import com.squareup.moshi.JsonClass
 data class CompanyInfoInsertBean(
     @Json(name = "accountId")
     val accountId: Int,
+    @Json(name = "employerCompanyInfoName")
+    val employerCompanyInfoName: String,
     @Json(name = "employerCompanyInfoBusinessScope")
     val employerCompanyInfoBusinessScope: String,
     @Json(name = "employerCompanyInfoBusinessState")

@@ -27,6 +27,7 @@ interface API {
     @GET("employer/insert/companyInfo")
     fun insertCompanyInfo(
         @Query("accountId") accountId: Int,
+        @Query("employerCompanyInfoName") employerCompanyInfoName: String,
         @Query("employerCompanyInfoCompanyType") employerCompanyInfoCompanyType: String,
         @Query("employerCompanyInfoBusinessState") employerCompanyInfoBusinessState: String,
         @Query("employerCompanyInfoFoundTime") employerCompanyInfoFoundTime: String,
@@ -42,6 +43,7 @@ interface API {
     @GET("employer/update/companyInfo")
     fun updateCompanyInfo(
         @Query("employerCompanyInfoId") employerCompanyInfoId: Int,
+        @Query("employerCompanyInfoName") employerCompanyInfoName: String,
         @Query("employerCompanyInfoCompanyType") employerCompanyInfoCompanyType: String,
         @Query("employerCompanyInfoBusinessState") employerCompanyInfoBusinessState: String,
         @Query("employerCompanyInfoFoundTime") employerCompanyInfoFoundTime: String,

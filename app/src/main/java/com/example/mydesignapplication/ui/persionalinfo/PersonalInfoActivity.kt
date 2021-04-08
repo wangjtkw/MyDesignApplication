@@ -18,6 +18,7 @@ import com.example.mydesignapplication.data.bean.Status
 import com.example.mydesignapplication.databinding.ActivityLoginBinding
 import com.example.mydesignapplication.databinding.ActivityPersonalInfoBinding
 import com.example.mydesignapplication.ext.isConnectedNetwork
+import com.example.mydesignapplication.ui.MainActivity
 import com.example.mydesignapplication.ui.album.AlbumActivity.Companion.ALBUM_ACTIVITY_REQUEST_CODE
 import com.example.mydesignapplication.ui.album.AlbumActivity.Companion.ALBUM_BEAN
 import com.example.mydesignapplication.ui.album.AlbumBean
@@ -103,13 +104,13 @@ class PersonalInfoActivity : PermissionActivity(), HasAndroidInjector {
         personalViewModel.updatePersonalInfoResult.observe(this) {
 
         }
-        personalViewModel.updatePersonalInfoHeadImgResult.observe(this){
+        personalViewModel.updatePersonalInfoHeadImgResult.observe(this) {
 
         }
-        personalViewModel.updatePersonalInfoFrontImgResult.observe(this){
+        personalViewModel.updatePersonalInfoFrontImgResult.observe(this) {
 
         }
-        personalViewModel.updatePersonalInfoBackImgResult.observe(this){
+        personalViewModel.updatePersonalInfoBackImgResult.observe(this) {
 
         }
         var personalInfoId: Int?
@@ -185,39 +186,49 @@ class PersonalInfoActivity : PermissionActivity(), HasAndroidInjector {
             headImgAlbumBean = data.getParcelableExtra(ALBUM_BEAN)
             val uri = Uri.parse(headImgAlbumBean!!.DATA)
             mBinding!!.activityPersonalHeadImgImg.setImageURI(uri)
-            if (isConnectedNetwork()) {
-                personalViewModel.updatePersonalInfoHeadImg(
-                    headImgAlbumBean,
-                    mPersonalInfoBean!!.employerPersonalInfoId
-                )
-            } else {
-                ToastUtil.makeToast("当前网络未连接，请重新选择头像")
+
+            if (MainActivity.EMPLOYER_ACCOUNT_BEAN?.employerPersonalInfoId != null) {
+                if (isConnectedNetwork()) {
+                    personalViewModel.updatePersonalInfoHeadImg(
+                        headImgAlbumBean,
+                        mPersonalInfoBean!!.employerPersonalInfoId
+                    )
+                } else {
+                    ToastUtil.makeToast("当前网络未连接，请重新选择头像")
+                }
+
             }
         }
         if (requestCode == FRONT_IMG && resultCode == RESULT_OK && data != null) {
             frontImgAlbumBean = data.getParcelableExtra(ALBUM_BEAN)
             val uri = Uri.parse(frontImgAlbumBean!!.DATA)
             mBinding!!.activityPersonalCardFrontImg.setImageURI(uri)
-            if (isConnectedNetwork()) {
-                personalViewModel.updatePersonalInfoFrontImg(
-                    frontImgAlbumBean,
-                    mPersonalInfoBean!!.employerPersonalInfoId
-                )
-            } else {
-                ToastUtil.makeToast("当前网络未连接，请重新选择身份证正面")
+
+            if (MainActivity.EMPLOYER_ACCOUNT_BEAN?.employerPersonalInfoId != null) {
+                if (isConnectedNetwork()) {
+                    personalViewModel.updatePersonalInfoFrontImg(
+                        frontImgAlbumBean,
+                        mPersonalInfoBean!!.employerPersonalInfoId
+                    )
+                } else {
+                    ToastUtil.makeToast("当前网络未连接，请重新选择身份证正面")
+                }
             }
         }
         if (requestCode == BACK_IMG && resultCode == RESULT_OK && data != null) {
             backImgAlbumBean = data.getParcelableExtra(ALBUM_BEAN)
             val uri = Uri.parse(backImgAlbumBean!!.DATA)
             mBinding!!.activityPersonalCardBackImg.setImageURI(uri)
-            if (isConnectedNetwork()) {
-                personalViewModel.updatePersonalInfoBackImg(
-                    backImgAlbumBean,
-                    mPersonalInfoBean!!.employerPersonalInfoId
-                )
-            } else {
-                ToastUtil.makeToast("当前网络未连接，请重新选择身份证背面")
+
+            if (MainActivity.EMPLOYER_ACCOUNT_BEAN?.employerPersonalInfoId != null) {
+                if (isConnectedNetwork()) {
+                    personalViewModel.updatePersonalInfoBackImg(
+                        backImgAlbumBean,
+                        mPersonalInfoBean!!.employerPersonalInfoId
+                    )
+                } else {
+                    ToastUtil.makeToast("当前网络未连接，请重新选择身份证背面")
+                }
             }
         }
     }

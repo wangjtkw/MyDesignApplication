@@ -11,6 +11,8 @@ data class CompanyInfoBean(
     @PrimaryKey
     @Json(name = "employerCompanyInfoId")
     val employerCompanyInfoId: Int,
+    @Json(name = "employerCompanyInfoName")
+    val employerCompanyInfoName: String,
     @Json(name = "employerCompanyInfoAuditState")
     val employerCompanyInfoAuditState: String,
     @Json(name = "employerCompanyInfoBusinessScope")

@@ -27,6 +27,7 @@ class CompanyInformationViewModel @Inject constructor(
 
     fun insertCompanyInfo(
         accountId: Int,
+        companyName: String,
         companyType: String,
         businessState: String,
         foundTime: String,
@@ -36,6 +37,10 @@ class CompanyInformationViewModel @Inject constructor(
         businessScope: String,
         callback: (EmployerAccountBean) -> Unit
     ) {
+        if (companyName.isEmpty() || "请选择" == companyType) {
+            ToastUtil.makeToast("请输入企业名称")
+            return
+        }
         if (companyType.isEmpty() || "请选择" == companyType) {
             ToastUtil.makeToast("请选择企业类型")
             return
@@ -67,6 +72,7 @@ class CompanyInformationViewModel @Inject constructor(
         }
         val comInfoBean = CompanyInfoInsertBean(
             accountId = accountId,
+            employerCompanyInfoName = companyName,
             employerCompanyInfoCompanyType = companyType,
             employerCompanyInfoBusinessState = businessState,
             employerCompanyInfoFoundTime = foundTime,
@@ -109,6 +115,7 @@ class CompanyInformationViewModel @Inject constructor(
 
     fun updateCompanyInfo(
         companyInfoId: Int,
+        companyName: String,
         companyType: String,
         businessState: String,
         foundTime: String,
@@ -118,6 +125,10 @@ class CompanyInformationViewModel @Inject constructor(
         businessScope: String,
         callback: () -> Unit
     ) {
+        if (companyName.isEmpty() || "请选择" == companyType) {
+            ToastUtil.makeToast("请输入企业名称")
+            return
+        }
         if (companyType.isEmpty() || "请选择" == companyType) {
             ToastUtil.makeToast("请选择企业类型")
             return
@@ -149,6 +160,7 @@ class CompanyInformationViewModel @Inject constructor(
         }
         val comInfoBean = CompanyInfoBean(
             employerCompanyInfoId = companyInfoId,
+            employerCompanyInfoName = companyName,
             employerCompanyInfoCompanyType = companyType,
             employerCompanyInfoBusinessState = businessState,
             employerCompanyInfoFoundTime = foundTime,

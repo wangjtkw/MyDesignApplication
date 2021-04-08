@@ -176,6 +176,7 @@ class CompanyInformationActivity : AppCompatActivity(), HasAndroidInjector {
     private fun insertCompanyInfo() {
         mBinding!!.apply {
             val accountId = mEmployerAccountBean!!.employerAccountId
+            val companyName = activityCompanyInfoNameEditText.text.toString()
             val companyType = activityCompanyInfoCompanyTypeTextView.text.toString()
             val businessState = activityCompanyInfoBusinessStateTextView.text.toString()
             val foundTime = activityCompanyInfoFoundTimeTextView.text.toString()
@@ -186,6 +187,7 @@ class CompanyInformationActivity : AppCompatActivity(), HasAndroidInjector {
             val businessScope = activityCompanyInfoBusinessScopeEditText.text.toString()
             companyInformationViewModel.insertCompanyInfo(
                 accountId = accountId,
+                companyName = companyName,
                 companyType = companyType,
                 businessState = businessState,
                 foundTime = foundTime,
@@ -205,6 +207,7 @@ class CompanyInformationActivity : AppCompatActivity(), HasAndroidInjector {
         }
         mBinding!!.apply {
             val companyInfoId = mCompanyInfoBean!!.employerCompanyInfoId
+            val companyName = activityCompanyInfoNameEditText.text.toString()
             val companyType = activityCompanyInfoCompanyTypeTextView.text.toString()
             val businessState = activityCompanyInfoBusinessStateTextView.text.toString()
             val foundTime = activityCompanyInfoFoundTimeTextView.text.toString()
@@ -215,6 +218,7 @@ class CompanyInformationActivity : AppCompatActivity(), HasAndroidInjector {
             val businessScope = activityCompanyInfoBusinessScopeEditText.text.toString()
             companyInformationViewModel.updateCompanyInfo(
                 companyInfoId = companyInfoId,
+                companyName = companyName,
                 companyType = companyType,
                 businessState = businessState,
                 foundTime = foundTime,

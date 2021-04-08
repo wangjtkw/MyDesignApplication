@@ -64,17 +64,19 @@ class MineFragment : Fragment() {
     }
 
     private fun getData() {
-        if (requireContext().isConnectedNetwork() && MainActivity.EMPLOYER_ACCOUNT_BEAN != null && MainActivity.EMPLOYER_ACCOUNT_BEAN!!.employerPersonalInfoId != null) {
-            videoViewModel.getPersonalInfo(MainActivity.EMPLOYER_ACCOUNT_BEAN!!.employerPersonalInfoId!!)
-                .observe(this) {
-                    when (it.status) {
-                        Status.SUCCESS -> {
-                            mBinding!!.personalInfo = it.data
+        if (MainActivity.EMPLOYER_ACCOUNT_BEAN != null && MainActivity.EMPLOYER_ACCOUNT_BEAN!!.employerPersonalInfoId != null) {
+            if (requireContext().isConnectedNetwork()) {
+                videoViewModel.getPersonalInfo(MainActivity.EMPLOYER_ACCOUNT_BEAN!!.employerPersonalInfoId!!)
+                    .observe(this) {
+                        when (it.status) {
+                            Status.SUCCESS -> {
+                                mBinding!!.personalInfo = it.data
+                            }
                         }
                     }
-                }
-        } else {
-            ToastUtil.makeToast("当前网络未连接！")
+            } else {
+                ToastUtil.makeToast("当前网络未连接！")
+            }
         }
 
     }

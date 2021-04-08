@@ -13,6 +13,7 @@ import com.example.mydesignapplication.data.bean.MyResponse
 import com.example.mydesignapplication.data.bean.PersonalInfoBean
 import com.example.mydesignapplication.data.datasource.LoginDataSource
 import com.example.mydesignapplication.data.datasource.PersonalInfoDataSource
+import com.example.mydesignapplication.ui.MainActivity
 import com.example.mydesignapplication.ui.album.AlbumBean
 import com.example.mydesignapplication.utils.HttpUtil
 import com.example.mydesignapplication.utils.ToastUtil
@@ -90,6 +91,7 @@ class PersonalInfoViewModel @Inject constructor(
                             } else {
                                 makeToast("保存成功")
                                 loginDataSource.insertAccount(viewModelScope, it.body.data)
+                                MainActivity.EMPLOYER_ACCOUNT_BEAN = it.body.data
                                 callback()
                             }
                         }
