@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
 
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="isVisibleList"
+            type="Boolean" />
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
@@ -58,6 +67,7 @@
             android:id="@+id/fragment_candidate_release_job_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:visibility="@{isVisibleList?View.GONE:View.VISIBLE}"
             app:layout_constraintTop_toBottomOf="@id/fragment_candidate_line_view">
 
             <include
@@ -66,11 +76,41 @@
 
         </FrameLayout>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/fragment_candidate_recycler_view"
+        <androidx.constraintlayout.widget.Group
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="@{isVisibleList?View.VISIBLE:View.GONE}"
+            app:constraint_referenced_ids="fragment_candidate_tab_layout,fragment_candidate_view_pager,line_view" />
+
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/fragment_candidate_tab_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/fragment_candidate_line_view" />
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/fragment_candidate_head_layout"
+            app:tabBackground="@android:color/transparent"
+            app:tabIndicatorFullWidth="false"
+            app:tabRippleColor="@android:color/transparent"
+            app:tabSelectedTextColor="@color/black_normal_color"
+            app:tabTextAppearance="@style/TabLayoutStyle"
+            app:tabTextColor="@color/black_hint_disable_color" />
+
+        <View
+            android:id="@+id/line_view"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/black_line_color"
+            app:layout_constraintTop_toBottomOf="@id/fragment_candidate_tab_layout" />
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/fragment_candidate_view_pager"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/line_view"
+            android:background="@color/gray_200"/>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

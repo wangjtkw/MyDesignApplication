@@ -1,5 +1,7 @@
 package com.example.mydesignapplication.di
 
+import com.example.mydesignapplication.ui.candidate.CandidateFragment
+import com.example.mydesignapplication.ui.candidate.CandidatePageFragment
 import com.example.mydesignapplication.ui.mine.MineFragment
 import com.example.mydesignapplication.ui.post.PostFragment
 import com.example.mydesignapplication.ui.post.PostPageFragment
@@ -18,4 +20,9 @@ abstract class FragmentBuildersModule {
     @ContributesAndroidInjector
     abstract fun contributePostPageFragment(): PostPageFragment
 
+    @ContributesAndroidInjector
+    abstract fun contributeCandidateFragment(): CandidateFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeCandidatePageFragment(): CandidatePageFragment
 }

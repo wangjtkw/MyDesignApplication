@@ -107,29 +107,13 @@ interface API {
         @Query("status") state: String
     ): LiveData<ApiResponse<MyResponse<List<PositionInfoBean>>>>
 
-//    @POST("insert/positionInfo")
+    @GET("employer/get/all/records")
+    fun getRecords(@Query("employerAccountId") employerAccountId: Int): LiveData<ApiResponse<MyResponse<List<RecordsEntity>>>>
 
-//    fun releaseJob(
-//        @Query("employerAccountId") employerAccountId: Int,
-//        @Query("employerPositionTitle") employerPositionTitle: String,
-//        @Query("employerPositionContent") employerPositionContent: String,
-//        @Query("employerPositionPersonNum") employerPositionPersonNum: String,
-//        @Query("employerPositionSalary") employerPositionSalary: String,
-//        @Query("employerPositionSettlement") employerPositionSettlement: String,
-//        @Query("employerPositionWelfare") employerPositionWelfare: String,
-//        @Query("employerPositionPlace") employerPositionPlace: String,
-//        @Query("employerPositionDate") employerPositionDate: String,
-//        @Query("employerPositionConnectType") employerPositionConnectType: String,
-//        @Query("employerPositionConnectInfo") employerPositionConnectInfo: String,
-//        @Query("employerPositionPersonRequirements") employerPositionPersonRequirements: String,
-//        @Query("employerPositionIndustry") employerPositionIndustry: String,
-//        @Query("employerPositionCity") employerPositionCity: String,
-//        @Query("addPositionRequirement") addPositionRequirement: Boolean,
-//        @Query("positionRequirementAge") positionRequirementAge: String,
-//        @Query("positionRequirementSex") positionRequirementSex: String,
-//        @Query("positionRequirementHeight") positionRequirementHeight: String,
-//        @Query("positionRequirementEducation") positionRequirementEducation: String,
-//    ): LiveData<ApiResponse<MyResponse<Any>>>
-
+    @GET("employer/get/recordsList/type")
+    fun getRecordsType(
+        @Query("employerAccountId") employerAccountId: Int,
+        @Query("type") type: String
+    ): LiveData<ApiResponse<MyResponse<List<RecordInfoResponse>>>>
 
 }

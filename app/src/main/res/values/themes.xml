@@ -17,7 +17,7 @@
     <style name="MyTheme" parent="Theme.AppCompat.Light.NoActionBar" />
 
     <style name="TabLayoutStyle">
-        <item name="android:textSize">18sp</item>
+        <item name="android:textSize">12sp</item>
         <item name="android:textStyle">bold</item>
     </style>
 

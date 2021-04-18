@@ -3,6 +3,8 @@ package com.example.mydesignapplication.di
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.mydesignapplication.common.MyViewModelFactory
+import com.example.mydesignapplication.ui.candidate.CandidatePageViewModel
+import com.example.mydesignapplication.ui.candidate.CandidateViewModel
 import com.example.mydesignapplication.ui.companyInfo.CompanyInformationViewModel
 import com.example.mydesignapplication.ui.login.LoginViewModel
 import com.example.mydesignapplication.ui.login.RegisterViewModel
@@ -51,6 +53,17 @@ abstract class ViewModelModel {
     @IntoMap
     @ViewModelKey(PostPageViewModel::class)
     abstract fun bindPostPageViewModel(postPageViewModel: PostPageViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(CandidateViewModel::class)
+    abstract fun bindCandidateViewModel(candidateViewModel: CandidateViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(CandidatePageViewModel::class)
+    abstract fun bindCandidatePageViewModel(candidatePageViewModel: CandidatePageViewModel): ViewModel
+
 
 
     @Binds
