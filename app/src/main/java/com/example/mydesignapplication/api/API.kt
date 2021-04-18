@@ -116,4 +116,10 @@ interface API {
         @Query("type") type: String
     ): LiveData<ApiResponse<MyResponse<List<RecordInfoResponse>>>>
 
+    @GET("employer/set/giveUp")
+    fun setGiveUp(@Query("recordId") recordId: Int): LiveData<ApiResponse<MyResponse<Any>>>
+
+    @GET("employer/set/employ")
+    fun setEmploy(@Query("recordId") recordId: Int): LiveData<ApiResponse<MyResponse<Any>>>
+
 }

@@ -18,9 +18,9 @@ class CandidatePageRecyclerAdapter(
     private var count: Int = 0
 
     fun addData(data: List<RecordInfoResponse>) {
-        count = mData.size
+        mData.clear()
         mData.addAll(data)
-        notifyItemRangeChanged(count, data.size)
+        notifyDataSetChanged()
         Log.e("recycler", mData.size.toString())
     }
 
@@ -35,6 +35,7 @@ class CandidatePageRecyclerAdapter(
         holder.bindData(mData[position], position)
         val recordId = mData[position].records!!.recordId!!
         holder.removeItem {
+            mData.remove(mData[position])
             removeCallback(recordId)
             notifyItemRemoved(position)
         }

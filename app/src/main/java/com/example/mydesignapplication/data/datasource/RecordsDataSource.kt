@@ -57,5 +57,13 @@ class RecordsDataSource @Inject constructor(
         return api.getRecordsType(employerAccountId, type)
     }
 
+    fun setRecordGiveUp(recordId: Int): LiveData<ApiResponse<MyResponse<Any>>> {
+        return api.setGiveUp(recordId)
+    }
+
+    fun setRecordEmploy(recordId: Int): LiveData<ApiResponse<MyResponse<Any>>> {
+        return api.setEmploy(recordId)
+    }
+
 
 }

@@ -22,6 +22,8 @@ class CandidatePageViewModel @Inject constructor(
 ) : ViewModel() {
 
     val getRecordsListResult = MediatorLiveData<List<RecordInfoResponse>>()
+    val giveUpResult = MediatorLiveData<Any>()
+
 
     fun getRecordByType(
         employerAccountId: Int,
@@ -51,10 +53,35 @@ class CandidatePageViewModel @Inject constructor(
                     }
                 }
             }
-
-
         }
+    }
 
+    fun setRecordGiveUp(recordId: Int, callback: () -> Unit) {
+        viewModelScope.launch(Dispatchers.IO) {
+            val result = dataSource.setRecordGiveUp(recordId)
+            launch(Dispatchers.Main) {
+                giveUpResult.addSource(result) {
+                    when (it) {
+                        is ApiSuccessResponse -> {
+                            if (it.body.code != 200) {
+                                makeToast("发生错误：${it.body.description}")
+                            } else {
+                                callback()
+                            }
+                        }
+                        is ApiEmptyResponse -> {
+                            makeToast("放弃失败！")
+                        }
+                        is ApiErrorResponse -> {
+                            makeToast("发生错误：${it.errorMessage}")
+                        }
+                        else -> {
+                            makeToast("失败！")
+                        }
+                    }
+                }
+            }
+        }
 
     }
 

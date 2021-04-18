@@ -69,7 +69,9 @@ class CandidatePageFragment : Fragment() {
 
     private fun initCallback() {
         removeCallback = {
-
+            viewModel.setRecordGiveUp(it) {
+                getData()
+            }
         }
         signUpCallback = {
 
@@ -90,6 +92,7 @@ class CandidatePageFragment : Fragment() {
         viewModel.getRecordsListResult.observe(requireActivity()) {
             recyclerAdapter!!.addData(it)
         }
+        viewModel.giveUpResult.observe(requireActivity(),{})
     }
 
     private fun getData() {
