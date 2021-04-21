@@ -23,6 +23,8 @@ class CandidatePageViewModel @Inject constructor(
 
     val getRecordsListResult = MediatorLiveData<List<RecordInfoResponse>>()
     val giveUpResult = MediatorLiveData<Any>()
+    val employResult = MediatorLiveData<Any>()
+    val settlementResult = MediatorLiveData<Any>()
 
 
     fun getRecordByType(
@@ -82,7 +84,63 @@ class CandidatePageViewModel @Inject constructor(
                 }
             }
         }
+    }
 
+    fun setRecordEmploy(recordId: Int, callback: () -> Unit) {
+        viewModelScope.launch(Dispatchers.IO) {
+            val result = dataSource.setRecordEmploy(recordId)
+            launch(Dispatchers.Main) {
+                employResult.addSource(result) {
+                    when (it) {
+                        is ApiSuccessResponse -> {
+                            if (it.body.code != 200) {
+                                makeToast("发生错误：${it.body.description}")
+                            } else {
+                                callback()
+                            }
+                        }
+                        is ApiEmptyResponse -> {
+                            makeToast("放弃失败！")
+                        }
+                        is ApiErrorResponse -> {
+                            makeToast("发生错误：${it.errorMessage}")
+                        }
+                        else -> {
+                            makeToast("失败！")
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+
+    fun setSettlement(recordId: Int, callback: () -> Unit) {
+        viewModelScope.launch(Dispatchers.IO) {
+            val result = dataSource.setSettlement(recordId)
+            launch(Dispatchers.Main) {
+                settlementResult.addSource(result) {
+                    when (it) {
+                        is ApiSuccessResponse -> {
+                            if (it.body.code != 200) {
+                                makeToast("发生错误：${it.body.description}")
+                            } else {
+                                callback()
+                            }
+                        }
+                        is ApiEmptyResponse -> {
+                            makeToast("放弃失败！")
+                        }
+                        is ApiErrorResponse -> {
+                            makeToast("发生错误：${it.errorMessage}")
+                        }
+                        else -> {
+                            makeToast("失败！")
+                        }
+                    }
+                }
+            }
+        }
     }
 
     private fun makeToast(msg: String) {

@@ -64,8 +64,8 @@ class PostFragment : Fragment() {
 
     private fun initTabLayout() {
         mBinding!!.fragmentCandidateTabLayout.apply {
-            addTab(newTab().setText("待审批"))
             addTab(newTab().setText("招聘中"))
+            addTab(newTab().setText("待审批"))
             addTab(newTab().setText("已下线"))
         }
     }
@@ -73,9 +73,9 @@ class PostFragment : Fragment() {
     private fun initViewPager() {
         fragmentList.apply {
             //招聘中
-            add(PostPageFragment.newInstance("待审批"))
-            //待发布
             add(PostPageFragment.newInstance("招聘中"))
+            //待发布
+            add(PostPageFragment.newInstance("待审批"))
             //已下线
             add(PostPageFragment.newInstance("已下线"))
         }

@@ -65,5 +65,9 @@ class RecordsDataSource @Inject constructor(
         return api.setEmploy(recordId)
     }
 
+    fun setSettlement(recordId: Int): LiveData<ApiResponse<MyResponse<Any>>> {
+        return api.setSettlement(recordId)
+    }
+
 
 }

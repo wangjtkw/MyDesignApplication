@@ -122,4 +122,7 @@ interface API {
     @GET("employer/set/employ")
     fun setEmploy(@Query("recordId") recordId: Int): LiveData<ApiResponse<MyResponse<Any>>>
 
+    @GET("employer/set/settlement")
+    fun setSettlement(@Query("recordId") recordId: Int): LiveData<ApiResponse<MyResponse<Any>>>
+
 }

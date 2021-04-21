@@ -74,10 +74,14 @@ class CandidatePageFragment : Fragment() {
             }
         }
         signUpCallback = {
-
+            viewModel.setRecordEmploy(it) {
+                getData()
+            }
         }
         settlementCallback = {
-
+            viewModel.setSettlement(it){
+                getData()
+            }
         }
     }
 
@@ -92,7 +96,9 @@ class CandidatePageFragment : Fragment() {
         viewModel.getRecordsListResult.observe(requireActivity()) {
             recyclerAdapter!!.addData(it)
         }
-        viewModel.giveUpResult.observe(requireActivity(),{})
+        viewModel.giveUpResult.observe(requireActivity(), {})
+        viewModel.employResult.observe(requireActivity(), {})
+        viewModel.settlementResult.observe(requireActivity(), {})
     }
 
     private fun getData() {

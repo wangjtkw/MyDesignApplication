@@ -43,6 +43,8 @@
             android:name=".ui.MainActivity"
             android:launchMode="singleTask" />
         <activity android:name=".ui.album.AlbumActivity" />
+
+        <service android:name=".netty.NettyService" />
     </application>
 
 </manifest>

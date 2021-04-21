@@ -40,10 +40,14 @@ class CandidatePageRecyclerAdapter(
             notifyItemRemoved(position)
         }
         holder.signUpItem {
+            mData.remove(mData[position])
             signUpCallback(recordId)
+            notifyItemRemoved(position)
         }
         holder.settlementItem {
+            mData.remove(mData[position])
             settlementCallback(recordId)
+            notifyItemRemoved(position)
         }
     }
 

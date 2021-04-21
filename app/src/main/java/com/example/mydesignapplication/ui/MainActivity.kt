@@ -16,6 +16,7 @@ import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2
 import com.example.mydesignapplication.R
 import com.example.mydesignapplication.data.bean.EmployerAccountBean
+import com.example.mydesignapplication.netty.NettyService
 import com.example.mydesignapplication.ui.candidate.CandidateFragment
 import com.example.mydesignapplication.ui.mine.MineFragment
 import com.example.mydesignapplication.ui.post.PostFragment
@@ -59,6 +60,12 @@ class MainActivity : AppCompatActivity(), HasAndroidInjector {
         StatusBarUtils.setLightBar(this, Color.TRANSPARENT)
         setContentView(R.layout.activity_main)
         init()
+        startService()
+    }
+
+    private fun startService(){
+        val intent = Intent(this,NettyService::class.java)
+        startService(intent)
     }
 
     private fun init() {
