@@ -2,6 +2,7 @@ package com.example.mydesignapplication.di
 
 import androidx.paging.ExperimentalPagingApi
 import com.example.mydesignapplication.ui.MainActivity
+import com.example.mydesignapplication.ui.chatting.ChattingActivity
 import com.example.mydesignapplication.ui.companyInfo.CompanyInformationActivity
 import com.example.mydesignapplication.ui.login.LoginActivity
 import com.example.mydesignapplication.ui.login.RegisterActivity
@@ -56,5 +57,9 @@ abstract class ActivityBuildersModel {
     @ExperimentalPagingApi
     @ContributesAndroidInjector()
     abstract fun contributeReleaseJob4Activity(): ReleaseJob4Activity
+
+    @ExperimentalPagingApi
+    @ContributesAndroidInjector()
+    abstract fun contributeChattingActivity(): ChattingActivity
 
 }

@@ -5,9 +5,11 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.mydesignapplication.common.MyViewModelFactory
 import com.example.mydesignapplication.ui.candidate.CandidatePageViewModel
 import com.example.mydesignapplication.ui.candidate.CandidateViewModel
+import com.example.mydesignapplication.ui.chatting.ChattingViewModel
 import com.example.mydesignapplication.ui.companyInfo.CompanyInformationViewModel
 import com.example.mydesignapplication.ui.login.LoginViewModel
 import com.example.mydesignapplication.ui.login.RegisterViewModel
+import com.example.mydesignapplication.ui.message.MessageViewModel
 import com.example.mydesignapplication.ui.mine.MineViewModel
 import com.example.mydesignapplication.ui.persionalinfo.PersonalInfoViewModel
 import com.example.mydesignapplication.ui.post.PostPageViewModel
@@ -64,7 +66,15 @@ abstract class ViewModelModel {
     @ViewModelKey(CandidatePageViewModel::class)
     abstract fun bindCandidatePageViewModel(candidatePageViewModel: CandidatePageViewModel): ViewModel
 
+    @Binds
+    @IntoMap
+    @ViewModelKey(MessageViewModel::class)
+    abstract fun bindMessageViewModel(messageViewModel: MessageViewModel): ViewModel
 
+    @Binds
+    @IntoMap
+    @ViewModelKey(ChattingViewModel::class)
+    abstract fun bindChattingViewModel(chattingViewModel: ChattingViewModel): ViewModel
 
     @Binds
     abstract fun bindViewModelFactory(factory: MyViewModelFactory): ViewModelProvider.Factory

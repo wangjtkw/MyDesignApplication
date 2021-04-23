@@ -1,6 +1,9 @@
 package com.example.mydesignapplication.netty
 
 import android.util.Log
+import android.util.TimeUtils
+import com.example.mydesignapplication.ui.message.ChattingBean
+import com.example.mydesignapplication.utils.TimeUtil
 import io.netty.channel.ChannelHandlerContext
 import io.netty.channel.ChannelInboundHandlerAdapter
 
@@ -17,19 +20,16 @@ class ChatReqHandler : ChannelInboundHandlerAdapter() {
                 Thread {
                     val clientId = message.clientID
                     val receiveId = message.receiveId
-                    try {
-                        Thread.sleep(1000)
-                    } catch (e: InterruptedException) {
-                        e.printStackTrace()
-                    }
-                    ctx.writeAndFlush(
-                        MessageFactory.getMessage(
-                            Constant.EMPLOYER2USER_MESSAGE,
-                            receiveId,
+                    val msg = message.body
+                    val chattingBean =
+                        ChattingBean(
                             clientId,
-                            System.currentTimeMillis().toString() + ":msg"
+                            receiveId,
+                            msg,
+                            TimeUtil.getCurrentTimestamp(),
+                            false
                         )
-                    )
+                    TCPDataSource.saveMessage(chattingBean)
                     Log.d(TAG, "收到的消息：" + message.body)
                 }.start()
             }

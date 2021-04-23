@@ -27,4 +27,12 @@ object TimeUtil {
         val calendar = Calendar.getInstance(locale)
         return calendar.timeInMillis / 1000
     }
+
+    fun getTimeByFormat(timeStamp: Long):String {
+        val mTime = timeStamp * 1000
+        val locale = Locale("zh", "CN")
+        val sdf = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", locale)
+        return sdf.format(mTime)
+    }
+
 }

@@ -39,10 +39,10 @@ class AppModel {
     @Provides
     fun provideOkHttp(httpLoggingInterceptor: HttpLoggingInterceptor): OkHttpClient {
         return OkHttpClient.Builder()
-            .connectTimeout(10,TimeUnit.SECONDS)
+            .connectTimeout(10, TimeUnit.SECONDS)
             .readTimeout(10, TimeUnit.SECONDS) //读取超时
             .writeTimeout(10, TimeUnit.SECONDS)
-            .callTimeout(10,TimeUnit.SECONDS)
+            .callTimeout(10, TimeUnit.SECONDS)
             .addInterceptor(httpLoggingInterceptor).build()
     }
 
@@ -61,12 +61,7 @@ class AppModel {
     @Singleton
     @Provides
     fun provideEmployerDB(application: Application): EmployerDB {
-        return Room.databaseBuilder(
-            application,
-            EmployerDB::class.java,
-            "employer.db"
-        ).fallbackToDestructiveMigration()//数据库更新时删除数据重新创建
-            .build()
+        return EmployerDB.getInstance(application)
     }
 
 }

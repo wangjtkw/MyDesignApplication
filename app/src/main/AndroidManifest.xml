@@ -43,6 +43,7 @@
             android:name=".ui.MainActivity"
             android:launchMode="singleTask" />
         <activity android:name=".ui.album.AlbumActivity" />
+        <activity android:name=".ui.chatting.ChattingActivity" />
 
         <service android:name=".netty.NettyService" />
     </application>

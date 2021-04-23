@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="chattingBean"
+            type="com.example.mydesignapplication.ui.message.ChattingBean" />
+
+        <variable
+            name="users"
+            type="com.example.mydesignapplication.data.bean.Users" />
+
+        <variable
+            name="employer"
+            type="com.example.mydesignapplication.data.bean.PersonalInfoBean" />
+
+    </data>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:orientation="horizontal">
+
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/chatting_other_group"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="@{chattingBean.isCurrentSend ? View.GONE:View.VISIBLE}"
+            app:constraint_referenced_ids="chatting_other_head,chatting_other_message_frame" />
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/chatting_other_head"
+            imageFromUrl="@{users.usersImg}"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="12dp"
+            android:src="@drawable/ic_head"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_goneMarginTop="0dp" />
+
+        <FrameLayout
+            android:id="@+id/chatting_other_message_frame"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/shape_circle_corner"
+            android:visibility="gone"
+            app:layout_constraintLeft_toRightOf="@id/chatting_other_head"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_goneMarginTop="0dp">
+
+            <TextView
+                android:id="@+id/chatting_other_message_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="13dp"
+                android:maxWidth="200dp"
+                android:text="@{chattingBean.msg}"
+                android:textColor="@color/black_normal_color"
+                android:textSize="12sp" />
+
+        </FrameLayout>
+
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/chatting_user_group"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="@{chattingBean.isCurrentSend ? View.VISIBLE:View.GONE}"
+            app:constraint_referenced_ids="chatting_user_head,chatting_user_message_frame" />
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/chatting_user_head"
+            imageFromUrl="@{employer.employerPersonalInfoHead}"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="15dp"
+            android:src="@drawable/ic_head"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_goneMarginTop="0dp" />
+
+        <FrameLayout
+            android:id="@+id/chatting_user_message_frame"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="12dp"
+            android:background="@drawable/shape_circle_corner"
+            app:layout_constraintRight_toLeftOf="@id/chatting_user_head"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_goneMarginTop="0dp">
+
+            <TextView
+                android:id="@+id/chatting_user_message_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="13dp"
+                android:maxWidth="200dp"
+                android:text="@{chattingBean.msg}"
+                android:textColor="@color/black_normal_color"
+                android:textSize="12sp" />
+
+        </FrameLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

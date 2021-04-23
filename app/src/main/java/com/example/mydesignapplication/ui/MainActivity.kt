@@ -21,6 +21,7 @@ import com.example.mydesignapplication.ui.candidate.CandidateFragment
 import com.example.mydesignapplication.ui.mine.MineFragment
 import com.example.mydesignapplication.ui.post.PostFragment
 import com.example.mydesignapplication.publicclass.ViewPagerAdapter
+import com.example.mydesignapplication.ui.message.MessageFragment
 import com.example.mydesignapplication.ui.releasejob.releasejob1.ReleaseJob1Activity
 import com.example.mydesignapplication.utils.StatusBarUtils
 import dagger.android.AndroidInjection
@@ -63,8 +64,8 @@ class MainActivity : AppCompatActivity(), HasAndroidInjector {
         startService()
     }
 
-    private fun startService(){
-        val intent = Intent(this,NettyService::class.java)
+    private fun startService() {
+        val intent = Intent(this, NettyService::class.java)
         startService(intent)
     }
 
@@ -91,7 +92,7 @@ class MainActivity : AppCompatActivity(), HasAndroidInjector {
         fragmentList.apply {
             add(CandidateFragment())
             add(PostFragment())
-            add(CandidateFragment())
+            add(MessageFragment())
             add(MineFragment())
         }
         viewPagerAdapter = ViewPagerAdapter(fragmentList, this)

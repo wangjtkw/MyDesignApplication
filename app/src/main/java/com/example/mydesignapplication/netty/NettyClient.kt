@@ -1,6 +1,10 @@
 package com.example.mydesignapplication.netty
 
 import android.util.Log
+import com.example.mydesignapplication.ui.MainActivity
+import com.example.mydesignapplication.ui.message.ChattingBean
+import com.example.mydesignapplication.utils.TimeUtil
+import com.example.mydesignapplication.utils.ToastUtil
 import io.netty.bootstrap.Bootstrap
 import io.netty.channel.Channel
 import io.netty.channel.ChannelInitializer
@@ -61,6 +65,33 @@ class NettyClient {
 
         fun connect(host: String, port: Int) {
             Thread { NettyClient().connect(port, host) }.start()
+        }
+
+        fun sendMessage(receiverId: Int, message: String) {
+            if (channel == null) {
+                ToastUtil.makeToast("出现错误！")
+                return
+            }
+            val clientId = MainActivity.EMPLOYER_ACCOUNT_BEAN!!.employerAccountId
+            channel!!.writeAndFlush(
+                MessageFactory.getMessage(
+                    Constant.USER2EMPLOYER_MESSAGE,
+                    clientId,
+                    receiverId,
+                    message
+                )
+            )
+            Thread {
+                val chattingBean =
+                    ChattingBean(
+                        clientId,
+                        receiverId,
+                        message,
+                        TimeUtil.getCurrentTimestamp(),
+                        true
+                    )
+                TCPDataSource.saveMessage(chattingBean)
+            }.start()
         }
 
         private fun connect(bootstrap: Bootstrap, host: String, port: Int, retry: Int) {

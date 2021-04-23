@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="messageBean"
+            type="com.example.mydesignapplication.ui.message.MessageBean" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/message_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginRight="16dp"
+        android:background="@drawable/shape_circle_corner_white"
+        android:paddingBottom="16dp">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/message_head_img"
+            imageFromUrl="@{messageBean.userHeadImg}"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:layout_gravity="center"
+            android:layout_margin="16dp"
+            android:src="@drawable/ic_head"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/message_name_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="@{messageBean.userName}"
+            android:textSize="@dimen/text_small_title"
+            app:layout_constraintLeft_toRightOf="@id/message_head_img"
+            app:layout_constraintTop_toTopOf="@id/message_head_img" />
+
+        <TextView
+            android:id="@+id/message_time_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:text="@{messageBean.time}"
+            android:textSize="@dimen/text_normal_text"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@id/message_head_img" />
+
+        <TextView
+            android:id="@+id/message_msg_text_view"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_normal"
+            android:layout_marginEnd="16dp"
+            android:ellipsize="end"
+            android:lines="1"
+            android:text="@{messageBean.msg}"
+            android:textSize="@dimen/text_normal_text"
+            app:layout_constraintBottom_toBottomOf="@id/message_head_img"
+            app:layout_constraintLeft_toRightOf="@id/message_head_img"
+            app:layout_constraintRight_toRightOf="parent" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
