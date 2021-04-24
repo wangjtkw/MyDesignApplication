@@ -18,9 +18,11 @@ class ChattingViewHolder(view: View) : DataBindingViewHolder<ChattingBean>(view)
 
     fun setUser(users: Users) {
         mBinding.users = users
+
     }
 
     fun setEmployer(personalInfoBean: PersonalInfoBean) {
         mBinding.employer = personalInfoBean
+
     }
 }

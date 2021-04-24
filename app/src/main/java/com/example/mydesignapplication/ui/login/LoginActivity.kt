@@ -58,7 +58,7 @@ class LoginActivity : AppCompatActivity(), HasAndroidInjector {
     }
 
     private fun initListener() {
-        mBinding!!.activityLoginAccountEditText.setText("15213110106")
+        mBinding!!.activityLoginAccountEditText.setText("18223490120")
         mBinding!!.activityLoginPasswordEditText.setText("1300421975a")
         mBinding!!.activityLoginLoginButton.setOnClickListener {
             loginViewModel.login(

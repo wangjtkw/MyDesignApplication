@@ -126,6 +126,7 @@ class ChattingActivity : AppCompatActivity(), HasAndroidInjector {
         mBinding!!.chattingSendButton.setOnClickListener {
             val msg = mBinding!!.chattingMessageEdit.text.toString()
             NettyClient.sendMessage(param!!.receiverId, msg)
+            mBinding!!.chattingMessageEdit.setText("")
         }
 
     }

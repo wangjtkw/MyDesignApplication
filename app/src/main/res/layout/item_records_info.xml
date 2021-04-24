@@ -7,6 +7,10 @@
         <import type="android.view.View" />
 
         <variable
+            name="head"
+            type="String" />
+
+        <variable
             name="jobPosition"
             type="String" />
 
@@ -79,6 +83,7 @@
             android:layout_gravity="center"
             android:layout_margin="8dp"
             android:src="@drawable/ic_head"
+            imageFromUrl="@{head}"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toBottomOf="@id/job_position_text_view" />
 
@@ -126,28 +131,32 @@
 
             <Button
                 android:id="@+id/online_communicate_button"
-                android:layout_width="80dp"
+                android:layout_width="wrap_content"
                 android:layout_height="40dp"
+                android:padding="8dp"
                 android:text="在线沟通" />
 
             <Button
                 android:id="@+id/settlement_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:padding="8dp"
                 android:text="结算"
                 android:visibility="@{isSettlement?View.VISIBLE:View.GONE}" />
 
             <Button
                 android:id="@+id/sign_up_button"
-                android:layout_width="80dp"
-                android:layout_height="40dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
                 android:text="录用"
                 android:visibility="@{isSignUp?View.VISIBLE:View.GONE}" />
 
             <Button
                 android:id="@+id/give_up_button"
-                android:layout_width="80dp"
-                android:layout_height="40dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
                 android:text="放弃"
                 android:visibility="@{isSignUp?View.VISIBLE:View.GONE}" />
 

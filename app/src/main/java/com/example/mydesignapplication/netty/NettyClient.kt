@@ -67,25 +67,25 @@ class NettyClient {
             Thread { NettyClient().connect(port, host) }.start()
         }
 
-        fun sendMessage(receiverId: Int, message: String) {
+        fun sendMessage(userId: Int, message: String) {
             if (channel == null) {
                 ToastUtil.makeToast("出现错误！")
                 return
             }
-            val clientId = MainActivity.EMPLOYER_ACCOUNT_BEAN!!.employerAccountId
+            val employerId = MainActivity.EMPLOYER_ACCOUNT_BEAN!!.employerAccountId
             channel!!.writeAndFlush(
                 MessageFactory.getMessage(
-                    Constant.USER2EMPLOYER_MESSAGE,
-                    clientId,
-                    receiverId,
+                    Constant.EMPLOYER2USER_MESSAGE,
+                    employerId,
+                    userId,
                     message
                 )
             )
             Thread {
                 val chattingBean =
                     ChattingBean(
-                        clientId,
-                        receiverId,
+                        userId,
+                        employerId,
                         message,
                         TimeUtil.getCurrentTimestamp(),
                         true

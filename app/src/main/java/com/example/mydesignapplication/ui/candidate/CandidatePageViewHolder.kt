@@ -6,6 +6,8 @@ import com.example.mydesignapplication.common.DataBindingViewHolder
 import com.example.mydesignapplication.data.bean.RecordInfoResponse
 import com.example.mydesignapplication.databinding.ItemRecordsInfoBinding
 import com.example.mydesignapplication.ext.isConnectedNetwork
+import com.example.mydesignapplication.ui.chatting.ChattingActivity
+import com.example.mydesignapplication.ui.chatting.ChattingRequestParam
 import com.example.mydesignapplication.utils.TimeUtil
 import com.example.mydesignapplication.utils.ToastUtil
 
@@ -18,6 +20,7 @@ class CandidatePageViewHolder(view: View) : DataBindingViewHolder<RecordInfoResp
             val sex = data.users!!.usersSex
             val role = data.users!!.usersRole
             val mInfo = "$sex | $age | $role"
+            head = data.users!!.usersImg
             jobPosition = data.position!!.employerPositionTitle
             status = data.records!!.recordStateEmployer
             name = data.users!!.usersName
@@ -38,6 +41,12 @@ class CandidatePageViewHolder(view: View) : DataBindingViewHolder<RecordInfoResp
 //                    signUpButton.visibility = View.GONE
 //                    giveUpButton.visibility = View.GONE
 //                }
+            }
+            onlineCommunicateButton.setOnClickListener {
+                val receiveId = data.records!!.usersAccountId!!
+                val receiveName = data.users!!.usersName!!
+                val chattingRequestParam = ChattingRequestParam(receiveId, receiveName)
+                ChattingActivity.startAction(context(), chattingRequestParam)
             }
             invalidateAll()
         }
